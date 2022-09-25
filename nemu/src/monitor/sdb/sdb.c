@@ -54,6 +54,8 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_help(char *args);
+static int cmd_info(char *args);
+
 
 static struct {
   const char *name;
@@ -63,7 +65,8 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  {"si","Let the program execute N instructions in a single step and then suspend execution,When N is not given, it defaults to 1",cmd_si }
+  { "si","Let the program execute N instructions in a single step and then suspend execution,When N is not given, it defaults to 1",cmd_si },
+  { "info","Print Program States",cmd_info}
   /* TODO: Add more commands */
 
 };
@@ -98,7 +101,7 @@ static int cmd_si(char *args) {
         {
           if(tokens[0][j]<'0'||tokens[0][j]>'9')
             {
-              printf("Unknown command %s\n",args);
+              printf("Unknown command si %s\n",args);
               return 0;
             }
           else{
@@ -138,9 +141,32 @@ static int cmd_help(char *args) {
   return 0;
 }
 
+
+static int cmd_info(char *args)
+  { 
+    
+    if(strcmp(args,"r")==0)
+     {
+      isa_reg_display();
+      
+     }
+    else
+      {
+        printf("Unknown command info %s\n",args);
+      }
+     return 0;
+  }
+
+
+
+
+
 void sdb_set_batch_mode() {
   is_batch_mode = true;
 }
+
+
+
 
 void sdb_mainloop() {
   if (is_batch_mode) {
