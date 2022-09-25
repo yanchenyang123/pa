@@ -103,6 +103,7 @@ static int cmd_si(char *args) {
             }
           else{
             n=n*10+(tokens[1][j]-'0');
+            printf("%d\n",n);
             
           }
         }
