@@ -74,6 +74,7 @@ static int cmd_si(char *args) {
   int i=0;
   int n=0;
 	token=strtok(args," ");
+  printf("%s\n",token);
   while(token!=NULL)
   {printf("%s\n",token);
     tokens[i]=token;
