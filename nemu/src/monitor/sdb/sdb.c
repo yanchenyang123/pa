@@ -73,30 +73,28 @@ static int cmd_si(char *args) {
 	char *token,*tokens[10];
   int i=0;
   int n=0;
-  printf("%s\n",args);
 	token=strtok(args," ");
-  printf("%s\n",token);
   while(token!=NULL)
-  {printf("%s\n",token);
+  {
     tokens[i]=token;
     token=strtok(NULL," ");
     i+=1;
   }
   i-=1;
 
-  if(i==0)
+  if(i==-1)
     {
       cpu_exec(1);
       return 0;
     }
-  else if(i==2)
+  else if(i>=1)
     {
-      printf("Unknown command %s\n",args);
+      printf("Unknown command si %s\n",args);
       return 0;
     }
   else 
     {
-      for(int j=0;tokens[1][j]!='\0';j+=1)
+      for(int j=0;tokens[0][j]!='\0';j+=1)
         {
           if(tokens[1][j]<'0'||tokens[1][j]>'9')
             {
@@ -104,7 +102,7 @@ static int cmd_si(char *args) {
               return 0;
             }
           else{
-            n=n*10+(tokens[1][j]-'0');
+            n=n*10+(tokens[0][j]-'0');
             
             
           }
