@@ -48,13 +48,30 @@ static int cmd_c(char *args) {
 }
 
 
+static int cmd_si(char *args);
+static int cmd_q(char *args) {
+  return -1;
+}
+
+static int cmd_help(char *args);
+
+static struct {
+  const char *name;
+  const char *description;
+  int (*handler) (char *);
+} cmd_table [] = {
+  { "help", "Display information about all supported commands", cmd_help },
+  { "c", "Continue the execution of the program", cmd_c },
+  { "q", "Exit NEMU", cmd_q },
+  {"si","Let the program execute N instructions in a single step and then suspend execution,When N is not given, it defaults to 1",cmd_si }
+  /* TODO: Add more commands */
+
+};
+
+#define NR_CMD ARRLEN(cmd_table)
 static int cmd_si(char *args) {
 	char *token,*tokens[10];
 	token=strtok(args," ");
-  if(token[0]=='s'&&token[1]=='i'){
-    printf("%d",1);
-    return 0;
-  }
 	tokens[0]=token;
 	int i=1;
 	int N[10];
@@ -98,26 +115,6 @@ static int cmd_si(char *args) {
 }
 
 }
-static int cmd_q(char *args) {
-  return -1;
-}
-
-static int cmd_help(char *args);
-
-static struct {
-  const char *name;
-  const char *description;
-  int (*handler) (char *);
-} cmd_table [] = {
-  { "help", "Display information about all supported commands", cmd_help },
-  { "c", "Continue the execution of the program", cmd_c },
-  { "q", "Exit NEMU", cmd_q },
-  {"si [N]","Let the program execute N instructions in a single step and then suspend execution,When N is not given, it defaults to 1",cmd_si }
-  /* TODO: Add more commands */
-
-};
-
-#define NR_CMD ARRLEN(cmd_table)
 
 static int cmd_help(char *args) {
   /* extract the first argument */
