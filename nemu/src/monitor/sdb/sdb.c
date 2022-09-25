@@ -78,7 +78,7 @@ static int cmd_si(char *args) {
   {
     tokens[i]=token;
     token=strtok(NULL," ");
-    i+=1;
+    i+=1;printf("%d\n",i);
   }
   i-=1;
 
@@ -103,7 +103,7 @@ static int cmd_si(char *args) {
             }
           else{
             n=n*10+(tokens[1][j]-'0');
-            printf("%d\n",n);
+            
             
           }
         }
