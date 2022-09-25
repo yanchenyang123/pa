@@ -48,6 +48,52 @@ static int cmd_c(char *args) {
 }
 
 
+static int cmd_si(char *args) {
+	char *token,*tokens[10];
+	token=strtok(args," ");
+	tokens[0]=token;
+	int i=1;
+	int N[10];
+  int n=0;
+	while(token!=NULL){
+	 tokens[i]=strtok(NULL," ");
+	 i+=1;
+	 };
+	 if(i>=3){
+	 printf("Unknown command '%s'\n",args);	
+	 return 0;	
+          }
+         
+   else if(i==1)
+    {
+    cpu_exec(1);
+    return 0;
+   }
+   else
+     {
+    for(int j=0;tokens[1][j]!='\0';j++)
+        {
+              
+         if(tokens[1][j]<'0'||tokens[1][j]>'9')
+          {
+          printf("Unknown command '%s'\n",args);
+          return 0;
+         	}
+         else{
+            N[j]=(tokens[1][j]-'0');
+            n=n*10+N[j];
+
+         }
+         }
+    
+    cpu_exec(n);
+    return 0;
+     		 
+             
+          
+}
+
+}
 static int cmd_q(char *args) {
   return -1;
 }
@@ -62,8 +108,7 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  {"si [N]","Let the program execute N instructions in a single step and then suspend execution,When N is not given, it defaults to 1",cpu_exec}
-  {"info SUBCMD","Print Program Status",}
+  {"si [N]","Let the program execute N instructions in a single step and then suspend execution,When N is not given, it defaults to 1",cmd_si }
   /* TODO: Add more commands */
 
 };
