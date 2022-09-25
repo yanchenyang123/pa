@@ -51,6 +51,10 @@ static int cmd_c(char *args) {
 static int cmd_si(char *args) {
 	char *token,*tokens[10];
 	token=strtok(args," ");
+  if(token[0]=='s'&&token[1]=='i'){
+    printf("%d",1);
+    return 0;
+  }
 	tokens[0]=token;
 	int i=1;
 	int N[10];
