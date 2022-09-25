@@ -73,6 +73,7 @@ static int cmd_si(char *args) {
 	char *token,*tokens[10];
   int i=0;
   int n=0;
+  printf("%s\n",args);
 	token=strtok(args," ");
   printf("%s\n",token);
   while(token!=NULL)
