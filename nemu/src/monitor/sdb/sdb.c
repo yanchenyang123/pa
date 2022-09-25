@@ -76,7 +76,7 @@ static int cmd_si(char *args) {
 	int i=1;
 	int N[10];
   int n=0;
-	while(token!=NULL){
+	while(tokens[i-1]!=NULL){
 	 tokens[i]=strtok(NULL," ");
 	 i+=1;
 	 };
