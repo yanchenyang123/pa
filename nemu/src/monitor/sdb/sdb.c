@@ -75,10 +75,10 @@ static int cmd_si(char *args) {
   int n=0;
 	token=strtok(args," ");
   while(token!=NULL)
-  {
+  {printf("%s\n",token);
     tokens[i]=token;
     token=strtok(NULL," ");
-    i+=1;printf("%d\n",i);
+    i+=1;
   }
   i-=1;
 
