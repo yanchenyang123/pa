@@ -96,7 +96,7 @@ static int cmd_si(char *args) {
     {
       for(int j=0;tokens[0][j]!='\0';j+=1)
         {
-          if(tokens[1][j]<'0'||tokens[1][j]>'9')
+          if(tokens[0][j]<'0'||tokens[0][j]>'9')
             {
               printf("Unknown command %s\n",args);
               return 0;
