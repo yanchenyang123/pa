@@ -147,7 +147,7 @@ static int cmd_help(char *args) {
 
 static int cmd_info(char *args)
   { 
-    char *token=strtok(NULL," ");
+    char *token=strtok(args," ");
     if(strcmp(token,"r")==0)
      {
       isa_reg_display();
