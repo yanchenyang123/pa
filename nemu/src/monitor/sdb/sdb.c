@@ -147,15 +147,15 @@ static int cmd_help(char *args) {
 
 static int cmd_info(char *args)
   { 
-    
-    if(strcmp(args,"r")==0)
+    char *token=strtok(NULL," ");
+    if(strcmp(token,"r")==0)
      {
       isa_reg_display();
       
      }
     else
       {
-        printf("Unknown command info %s\n",args);
+        printf("Unknown command info %s\n",token);
       }
      return 0;
   }
