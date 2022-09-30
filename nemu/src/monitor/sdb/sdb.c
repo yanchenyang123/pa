@@ -55,7 +55,7 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 static int cmd_info(char *args);
-
+static int cmd_x(char *args);
 
 static struct {
   const char *name;
@@ -66,12 +66,15 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si","Let the program execute N instructions in a single step and then suspend execution,When N is not given, it defaults to 1",cmd_si },
-  { "info","Print Program States",cmd_info}
+  { "info","Print Program States",cmd_info},
+  { "x","Scan memory",cmd_x}
   /* TODO: Add more commands */
 
 };
 
 #define NR_CMD ARRLEN(cmd_table)
+
+
 static int cmd_si(char *args) {
 	char *token,*tokens[10];
   int i=0;
@@ -157,6 +160,32 @@ static int cmd_info(char *args)
      return 0;
   }
 
+static int cmd_x(char *args)
+  {
+    char *token,*tokens[10];
+    token=strtok(args," ");
+    int i=0;
+    while(token!=NULL){
+      tokens[i]=token;
+      token=strtok(NULL," ");
+      i+=1;
+    }
+    i-=1;
+    if(i!=1)
+      {
+        printf("Unknown command x %s\n",args);
+        return 0;
+      }
+    else{
+        int n=0;
+        for(int i=0;tokens[0][i]!='\0';i++)
+           {
+            n=n*10+(tokens[0][i]-'0');
+           }
+
+        return 0;
+    }
+  }
 
 
 
