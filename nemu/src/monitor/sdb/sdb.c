@@ -75,7 +75,7 @@ static struct {
 #define NR_CMD ARRLEN(cmd_table)
 
 
-static int cmd_si(char *args) {
+static int cmd_si(char *args) {    //zhi xing zhiling
 	char *token,*tokens[10];
   int i=0;
   int n=0;
