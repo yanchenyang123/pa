@@ -182,7 +182,7 @@ static int cmd_x(char *args)
           for(int i=0;i<N;i++)
               {
                 printf("%x\n",paddr_read(index,4));
-                index+=8;
+                index+=4;
 
               }
           printf("%x\n",paddr_read(index,4));
