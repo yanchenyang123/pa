@@ -18,6 +18,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include <memory/paddr.h>
 
 static int is_batch_mode = false;
 
@@ -56,7 +57,9 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 static int cmd_info(char *args);
 static int cmd_x(char *args);
-
+static int cmd_p(char *args);
+static int cmd_w(char *args);
+static int cmd_d(char *args);
 static struct {
   const char *name;
   const char *description;
@@ -67,13 +70,15 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si","Let the program execute N instructions in a single step and then suspend execution,When N is not given, it defaults to 1",cmd_si },
   { "info","Print Program States",cmd_info},
-  { "x","Scan memory",cmd_x}
+  { "x","Scan memory",cmd_x},
+  { "p","Solve the EXPR",cmd_p},
+  { "w","Set a Viewpoint,When EXPR is changed,stop the program",cmd_w},
+  { "d","Remove a Viewpoint",cmd_d}
   /* TODO: Add more commands */
 
 };
 
 #define NR_CMD ARRLEN(cmd_table)
-
 
 static int cmd_si(char *args) {    //zhi xing zhiling
 	char *token,*tokens[10];
@@ -119,8 +124,6 @@ static int cmd_si(char *args) {    //zhi xing zhiling
           
 }
 
-
-
 static int cmd_help(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
@@ -143,7 +146,6 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
-
 
 static int cmd_info(char *args)
   { 
@@ -171,25 +173,38 @@ static int cmd_x(char *args)
       i+=1;
     }
     i-=1;
-    if(i!=1)
-      {
-        printf("Unknown command x %s\n",args);
-        return 0;
-      }
-    else{
-        int n=0;
-        for(int i=0;tokens[0][i]!='\0';i++)
-           {
-            n=n*10+(tokens[0][i]-'0');
-           }
+    if(i==1)
+        {
+          paddr_t index;
+          sscanf(tokens[1],"%x",&index);
+          int N;
+          sscanf(tokens[0],"%d",&N);
+          for(int i=0;i<N;i++)
+              {
+                printf("%x",paddr_read(index,4));
+                index+=8;
 
-        return 0;
-    }
+              }
+          printf("%x",paddr_read(index,4));
+
+
+        }
+    return 0;
   }
 
+static int cmd_p(char *args)
+  {
+    return 0;
+  }
 
-
-
+static int cmd_w(char *args)
+   {
+    return 0;
+   }
+static int cmd_d(char *args)
+  {
+    return 0;
+  }
 void sdb_set_batch_mode() {
   is_batch_mode = true;
 }
