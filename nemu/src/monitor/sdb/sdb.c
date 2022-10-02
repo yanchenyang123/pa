@@ -181,11 +181,11 @@ static int cmd_x(char *args)
           sscanf(tokens[0],"%d",&N);
           for(int i=0;i<N;i++)
               {
-                printf("0x%x,%x\n",index,paddr_read(index,4));
+                printf("0x%x:     %x\n",index,paddr_read(index,4));
                 index+=4;
 
               }
-          printf("0x%x,%x\n",index,paddr_read(index,4));
+          printf("0x%x:     %x\n",index,paddr_read(index,4));
 
 
         }
