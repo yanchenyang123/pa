@@ -100,6 +100,7 @@ static int nr_token __attribute__((used))  = 0;
 static char* substr(char *str,char *start,int length)
   {
     char *b=start;
+    b[length]='\0';
     return b;
   }
 
