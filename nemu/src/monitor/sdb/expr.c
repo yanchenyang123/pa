@@ -19,9 +19,24 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
-
+#include<assert.h>
+#include<common.h>
+#include <memory/paddr.h>
 enum {
-  TK_NOTYPE = 256, TK_EQ,
+  TK_NOTYPE = 256,
+  TK_jia,
+  TK_Jian,
+  TK_EQ,
+  TK_MU,
+  TK_DZ,
+  TK_Chu,
+  TK_Reg,
+  TK_zuo,
+  TK_you,
+  TK_num,
+  TK_NQ,
+  TK_YU,
+  TK_DEREF
 
   /* TODO: Add more token types */
 
@@ -37,8 +52,19 @@ static struct rule {
    */
 
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
+  {"\\+", TK_jia},         // plus
   {"==", TK_EQ},        // equal
+  {"^(0x).{1,8}$", TK_DZ},  //16jinzhi
+  {"\\*",TK_MU},          // multiply
+  {"\\-",TK_Jian},        //jianfa
+  {"\\/",TK_Chu},         //chufa
+  {"^\\$[^0-9][a-z0-9]+$",TK_Reg},         //reg_value
+  {"\\(", TK_zuo},
+  {"\\)",TK_you},
+  {"[1-9][0-9]*",TK_num},
+  {"!=", TK_NQ},
+  {"&&",TK_YU},
+  {"\\*",TK_DEREF}
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -64,11 +90,20 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char str[32];
+  char *str;
 } Token;
 
-static Token tokens[32] __attribute__((used)) = {};
+static Token tokens[1000] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
+
+
+static char* substr(char *str,char *start,int length)
+  {
+    char *b=start;
+
+    return b;
+  }
+
 
 static bool make_token(char *e) {
   int position = 0;
@@ -95,10 +130,10 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default: TODO();
+          default:tokens[nr_token].type=rules[i].token_type;tokens[nr_token].str=substr(e,substr_start,substr_len);break;
         }
 
-        break;
+
       }
     }
 
@@ -111,15 +146,150 @@ static bool make_token(char *e) {
   return true;
 }
 
+bool check_parentheses(int p,int q)
+  { 
+    if(p+1==q)
+      {
+        assert(0);
+      }
+    int num=0;
+    if(tokens[p].type==TK_zuo && tokens[q].type==TK_you)
+      {
+        for(int i=p+1;i<q;i++)
+          {
+            if(tokens[i].type==TK_zuo)
+              {
+                num+=1;
+              }
+            else if(tokens[i].type==TK_you)
+              {
+                num-=1;
+              }
+            if(num<0)
+              {
+                assert(0);
+              }
+          }
+        if(num!=0)
+          {
+            assert(0);
+          }
+        else
+          {
+            return true;
+          }
+      }   
+    else
+      {
+        return false;
+      }
+        
+  }
+    
+int NBL_ZYSF(int p,int q)
+  {
+    int index=0;
+    for(int i=p;i<=q;i++)
+      {
+        if(tokens[i].type==TK_zuo)
+          {
+            for(int j=i;j<=q;j++)
+              {
+                if(tokens[j].type==TK_you)
+                  {
+                    i=j;
+                    break;
+                  }
+              }
+          }
+        else if(index==0&&(tokens[i].type==TK_Chu||tokens[i].type==TK_MU||tokens[i].type==TK_jia||tokens[i].type==TK_Jian))
+          {
+            index=i;
+          }
+        else if(index!=0&&(tokens[i].type==TK_Chu||tokens[i].type==TK_MU||tokens[i].type==TK_jia||tokens[i].type==TK_Jian))
+          {
+            if(tokens[index].type==TK_jia||tokens[index].type==TK_Jian)
+              {
+                if(tokens[i].type==TK_jia||tokens[i].type==TK_Jian)
+                  {
+                    index=i;
+                  }
+              }
+            else if(tokens[i].type==TK_Chu||tokens[i].type==TK_MU)
+              {
+                index=i;
+              }
+          }
+      }
+    return index;
+  }
+paddr_t f(int p,int q)
+  { 
 
-word_t expr(char *e, bool *success) {
+      if (p > q) {
+          assert(0);
+        }
+      else if (p == q) 
+      {
+        unsigned int index;
+        switch (tokens[p].type)
+          {
+            case TK_DZ: 
+            {
+              sscanf(tokens[p].str,"%x",&index);
+              return paddr_read(index,4);             
+            };
+            case TK_Reg:
+            {
+              return isa_reg_str2val(tokens[p].str,NULL);
+            };
+            case TK_num:
+            {
+              sscanf(tokens[p].str,"%x",&index);
+              return index;
+            };
+          }
+        }
+      else if (check_parentheses(p, q) == true) {
+        /* The expression is surrounded by a matched pair of parentheses.
+        * If that is the case, just throw away the parentheses.
+        */
+        return f(p + 1, q - 1);
+        }
+      else {
+        int op;
+        paddr_t val1,val2;
+        op=NBL_ZYSF(p,q);
+        val1=f(p,op-1);
+        val2=f(op+1,q);
+        
+          switch(tokens[op].type)
+            {
+            case TK_Chu:return val1/val2;
+            case TK_jia:return val1+val2;
+            case TK_Jian:return val1-val2;
+            case TK_MU: return val1*val2;
+            default:assert(0);
+            }
+        
+  
+  
+}
+  return 0;
+  }
+paddr_t expr(char *e, bool *success) 
+{
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
-
+  int p=0;
+  int q=nr_token-1;
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
 
-  return 0;
+  return f(p,q);
 }
+
+
+/* TODO: Implement code to evaluate the expression. */
+

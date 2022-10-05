@@ -19,7 +19,7 @@
 #include <readline/history.h>
 #include "sdb.h"
 #include <memory/paddr.h>
-
+#include <stdbool.h>
 static int is_batch_mode = false;
 
 void init_regex();
@@ -185,7 +185,6 @@ static int cmd_x(char *args)
                 index+=4;
 
               }
-          printf("0x%x:     %x\n",index,paddr_read(index,4));
 
 
         }
@@ -194,6 +193,7 @@ static int cmd_x(char *args)
 
 static int cmd_p(char *args)
   {
+    expr(args,NULL);
     return 0;
   }
 

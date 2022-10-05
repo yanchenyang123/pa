@@ -13,7 +13,9 @@
 * See the Mulan PSL v2 for more details.
 ***************************************************************************************/
 
-#include <common.h>
+#include<common.h>
+#include "isa.h"
+
 
 void init_monitor(int, char *[]);
 void am_init_monitor();
@@ -30,6 +32,24 @@ int main(int argc, char *argv[]) {
 
   /* Start engine. */
   engine_start();
-
+  /*char *A[10000];
+  FILE *fa=fopen("NEMU/tools/input","r");
+  assert(fa!=NULL);
+  while(!feof(fa))
+    {
+      fscanf(fa,"%[^\n]",&A);
+    }
+  int index=0;
+  for(int i=0;i<10000;i++)
+    {
+      int b;
+      char c[100000];
+      int n=sscanf(A[i],"%d' '%s",&b,c);
+      if(index==expr(c,true))
+        {
+          index+=1;
+        }
+    }
+  printf("%d",index);*/
   return 0;
 }
