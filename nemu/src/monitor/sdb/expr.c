@@ -97,12 +97,6 @@ static Token tokens[1000] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 
-static char* substr(char *str,char *start,int length)
-  {
-    char *b=start;
-    b[length]='\0';
-    return b;
-  }
 
 
 static bool make_token(char *e) {
@@ -129,9 +123,6 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
 
-        switch (rules[i].token_type) {
-          default:tokens[nr_token].type=rules[i].token_type;tokens[nr_token].str=substr(e,substr_start,substr_len);
-        }
 
 
       }
