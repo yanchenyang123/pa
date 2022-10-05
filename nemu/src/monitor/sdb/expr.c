@@ -98,7 +98,6 @@ static int nr_token __attribute__((used))  = 0;
 
 
 
-
 static bool make_token(char *e) {
   int position = 0;
   int i;
@@ -123,6 +122,10 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
 
+        switch (rules[i].token_type) {
+          default:tokens[nr_token].type=rules[i].token_type;tokens[nr_token].str=substr_start;
+          printf("%s",tokens[nr_token].str);
+        }
 
 
       }
