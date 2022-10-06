@@ -150,10 +150,7 @@ static bool make_token(char *e) {
 
 bool check_parentheses(int p,int q)
   { 
-    if(p+1==q)
-      {
-        assert(0);
-      }
+
     int num=0;
     if(tokens[p].type==TK_zuo && tokens[q].type==TK_you)
       {
