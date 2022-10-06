@@ -61,7 +61,7 @@ static struct rule {
   {"^\\$[^0-9][a-z0-9]+$",TK_Reg},         //reg_value
   {"\\(", TK_zuo},
   {"\\)",TK_you},
-  {"^[0-9]*$",TK_num},
+  {"[0-9][0-9]*",TK_num},
   {"!=", TK_NQ},
   {"&&",TK_YU},
   {"\\*",TK_DEREF},
@@ -130,7 +130,7 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default:tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);break;
+          default:tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);printf("%s",tokens[nr_token].str);break;
         }
 
 
