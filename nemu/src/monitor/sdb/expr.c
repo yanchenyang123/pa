@@ -143,7 +143,7 @@ static bool make_token(char *e) {
           case TK_you:{tokens[nr_token].type=TK_you;substr(substr_start,substr_len);nr_token+=1;break;}
           case TK_YU:{tokens[nr_token].type=TK_YU;substr(substr_start,substr_len);nr_token+=1;break;}
           case TK_zuo:{tokens[nr_token].type=TK_zuo;substr(substr_start,substr_len);nr_token+=1;break;}
-          default:assert(0);
+          default:continue;
 
         }
 
