@@ -130,6 +130,7 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
           default:tokens[nr_token].type=rules[i].token_type;substr(i,substr_start,substr_len);
+          printf("%s",tokens[i].str);
         }
 
 
