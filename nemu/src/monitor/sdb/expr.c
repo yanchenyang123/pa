@@ -100,7 +100,7 @@ static void substr(int i,char *str_start,int length)
   {
     for(int j=0;j<length;j++)
       {
-        tokens[i].str[j]=str_start[i];
+        tokens[i].str[j]=str_start[j];
       }
   }
 
