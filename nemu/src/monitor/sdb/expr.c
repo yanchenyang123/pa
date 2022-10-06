@@ -96,11 +96,11 @@ typedef struct token {
 static Token tokens[1000] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
-static void substr(int i,char *str_start,int length)
+static void substr(char *str_start,int length)
   {
     for(int j=0;j<length;j++)
       {
-        tokens[i].str[j]=str_start[j];
+        tokens[nr_token].str[j]=str_start[j];
       }
   }
 
@@ -129,8 +129,7 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default:tokens[nr_token].type=rules[i].token_type;substr(i,substr_start,substr_len);
-          printf("%s",tokens[i].str);
+          default:tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);break;
         }
 
 
