@@ -140,7 +140,7 @@ static bool make_token(char *e) {
     }
     if(e[position]=='\0')
       {
-        printf("true");
+        printf("true\n");
       }
     printf("%d",i);
     if (i == NR_REGEX) {
