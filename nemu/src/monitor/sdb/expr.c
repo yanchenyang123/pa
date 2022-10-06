@@ -124,12 +124,16 @@ static bool make_token(char *e) {
 
         position += substr_len;
 
+
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
 
-
+        if(e[1]=='\0')
+          {
+            printf("true");
+          }
         switch (rules[i].token_type) {
           default:{tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);break;}
         }
