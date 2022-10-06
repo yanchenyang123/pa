@@ -61,7 +61,7 @@ static struct rule {
   {"^\\$[^0-9][a-z0-9]+$",TK_Reg},         //reg_value
   {"\\(", TK_zuo},
   {"\\)",TK_you},
-  {"[0-9]*",TK_num},
+  {"^[0-9]*$",TK_num},
   {"!=", TK_NQ},
   {"&&",TK_YU},
   {"\\*",TK_DEREF},
