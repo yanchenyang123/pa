@@ -130,14 +130,14 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
 
-        
-        switch (rules[i].token_type) {
-          default:{tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);break;}
+      tokens[nr_token].type=rules[i].token_type;
+      substr(substr_start,substr_len);
+      break;
         }
 
 
       }
-    }
+    
     if(e[position]=='\0')
       {
         printf("true\n");
@@ -147,6 +147,7 @@ static bool make_token(char *e) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
     }
+
   }
 
   return true;
