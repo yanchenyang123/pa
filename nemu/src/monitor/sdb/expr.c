@@ -35,8 +35,8 @@ enum {
   TK_you,
   TK_num,
   TK_NQ,
-  TK_YU,
-  TK_DEREF
+  TK_YU
+
 
   /* TODO: Add more token types */
 
@@ -64,7 +64,6 @@ static struct rule {
   {"[1-9][0-9]*",TK_num},
   {"!=", TK_NQ},
   {"&&",TK_YU},
-  {"\\*",TK_DEREF},
   
 };
 
@@ -129,20 +128,24 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-      if(rules[i].token_type==TK_Reg)
+      switch(rules[i].token_type)
         {
-          tokens[nr_token].type=rules[i].token_type;
-          substr(substr_start+1,substr_len);
-          nr_token+=1;
-          break;
+          case TK_Chu:{tokens[nr_token].type=TK_Chu;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_DZ:{tokens[nr_token].type=TK_DZ;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_jia:{tokens[nr_token].type=TK_jia;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_EQ:{tokens[nr_token].type=TK_EQ;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_Jian:{tokens[nr_token].type=TK_Jian;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_MU:{tokens[nr_token].type=TK_MU;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_NOTYPE:{tokens[nr_token].type=TK_NOTYPE;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_NQ:{tokens[nr_token].type=TK_DZ;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_num:{tokens[nr_token].type=TK_num;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_Reg:{tokens[nr_token].type=TK_Reg;substr(substr_start+1,substr_len);nr_token+=1;break;}
+          case TK_you:{tokens[nr_token].type=TK_you;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_YU:{tokens[nr_token].type=TK_YU;substr(substr_start,substr_len);nr_token+=1;break;}
+          case TK_zuo:{tokens[nr_token].type=TK_zuo;substr(substr_start,substr_len);nr_token+=1;break;}
+          default:assert(0);
+
         }
-      else
-      {
-      tokens[nr_token].type=rules[i].token_type;
-      nr_token+=1;
-      substr(substr_start,substr_len);
-      break;
-      }
 
         }
 
@@ -298,7 +301,7 @@ paddr_t expr(char *e, bool *success)
   /* TODO: Insert codes to evaluate the expression. */
   paddr_t a=f(p,q);
   printf("%d",a);
-  return f(p,q);
+  return a;
 }
 
 
