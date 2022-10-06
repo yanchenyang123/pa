@@ -61,7 +61,7 @@ static struct rule {
   {"^\\$[^0-9][a-z0-9]+$",TK_Reg},         //reg_value
   {"\\(", TK_zuo},
   {"\\)",TK_you},
-  {"[0-9][0-9]*",TK_num},
+  {"[1-9][0-9]*",TK_num},
   {"!=", TK_NQ},
   {"&&",TK_YU},
   {"\\*",TK_DEREF},
@@ -118,7 +118,6 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
-        printf("%d",position);
 
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
