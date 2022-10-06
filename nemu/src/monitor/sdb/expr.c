@@ -52,7 +52,7 @@ static struct rule {
    */
 
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", TK_jia},         // plus
+  {"^\\+$", TK_jia},         // plus
   {"==", TK_EQ},        // equal
   {"^(0x).{1,8}$", TK_DZ},  //16jinzhi
   {"\\*",TK_MU},          // multiply
