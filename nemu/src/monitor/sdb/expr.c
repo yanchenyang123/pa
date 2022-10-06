@@ -292,12 +292,8 @@ paddr_t expr(char *e, bool *success)
     *success = false;
     return 0;
   }
-  for(int i=0;i<=nr_token;i++)
-    {
-      printf("%s\n",tokens[i].str);
-    }
   int p=0;
-  int q=nr_token-1;
+  int q=nr_token;
   /* TODO: Insert codes to evaluate the expression. */
   paddr_t a=f(p,q);
   printf("%d",a);
