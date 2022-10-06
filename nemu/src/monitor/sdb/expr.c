@@ -292,7 +292,7 @@ paddr_t expr(char *e, bool *success)
     *success = false;
     return 0;
   }
-  for(int i=0;i<nr_token;i++)
+  for(int i=0;i<=nr_token;i++)
     {
       printf("%s\n",tokens[i].str);
     }
