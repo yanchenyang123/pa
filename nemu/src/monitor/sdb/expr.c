@@ -112,7 +112,7 @@ static bool make_token(char *e) {
 
   nr_token = 0;
 
-  while (e[position+1] != '\0') {
+  while (e[position] != '\0') {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
@@ -123,13 +123,12 @@ static bool make_token(char *e) {
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
-        if(e[position]!='\0')
-           printf("%d,%s",position,&e[position]);
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+
 
         switch (rules[i].token_type) {
           default:tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);break;
@@ -138,7 +137,8 @@ static bool make_token(char *e) {
 
       }
     }
-
+          if(e[position]=='\0')
+           {break;}
     if (i == NR_REGEX) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
