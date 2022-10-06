@@ -131,14 +131,12 @@ static bool make_token(char *e) {
 
 
         switch (rules[i].token_type) {
-          default:tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);break;
+          default:{tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);break;}
         }
 
 
       }
     }
-          if(e[position]=='\0')
-           {break;}
     if (i == NR_REGEX) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
