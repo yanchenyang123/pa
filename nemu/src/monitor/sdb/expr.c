@@ -131,6 +131,7 @@ static bool make_token(char *e) {
          */
 
       tokens[nr_token].type=rules[i].token_type;
+      nr_token+=1;
       substr(substr_start,substr_len);
       break;
         }
