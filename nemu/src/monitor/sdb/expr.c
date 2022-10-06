@@ -295,7 +295,7 @@ paddr_t expr(char *e, bool *success)
   }
   for(int i=0;i<nr_token;i++)
     {
-      printf("%s",tokens[i].str);
+      printf("%s\n",tokens[i].str);
     }
   int p=0;
   int q=nr_token-1;
