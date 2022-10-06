@@ -107,7 +107,7 @@ static void substr(char *str_start,int length)
 
 static bool make_token(char *e) {
   int position = 0;
-  int i;
+  int i=0;
   regmatch_t pmatch;
 
   nr_token = 0;
@@ -115,7 +115,6 @@ static bool make_token(char *e) {
   while (e[position] != '\0') {
     /* Try all rules one by one. */
     printf("%d",i);
-    printf("%d",NR_REGEX);
     for (i = 0; i < NR_REGEX; i ++) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
