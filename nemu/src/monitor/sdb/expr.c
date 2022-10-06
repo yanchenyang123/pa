@@ -266,6 +266,14 @@ paddr_t f(int p,int q)
         return f(p + 1, q - 1);
         }
       else {
+        if(tokens[p].type==TK_NOTYPE)
+          {
+            return f(p+1,q);
+          }
+        if(tokens[q].type==TK_NOTYPE)
+          {
+            return f(p,q-1);
+          }
         int op;
         paddr_t val1,val2;
         op=NBL_ZYSF(p,q);
@@ -293,7 +301,7 @@ paddr_t expr(char *e, bool *success)
     return 0;
   }
   int p=0;
-  int q=nr_token;
+  int q=nr_token-1;
   /* TODO: Insert codes to evaluate the expression. */
   paddr_t a=f(p,q);
   printf("%d",a);
