@@ -193,7 +193,9 @@ static int cmd_x(char *args)
 
 static int cmd_p(char *args)
   {
-    expr(args,NULL);
+    _Bool *succese;
+    succese=(_Bool *)true;
+    expr(args,succese);
     return 0;
   }
 
