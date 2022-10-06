@@ -293,10 +293,10 @@ paddr_t expr(char *e, bool *success)
     return 0;
   }
   int p=0;
-  printf("%d",nr_token);
   int q=nr_token-1;
   /* TODO: Insert codes to evaluate the expression. */
-
+  paddr_t a=f(p,q);
+  printf("%d",a);
   return f(p,q);
 }
 
