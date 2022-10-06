@@ -130,7 +130,7 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default:tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);break;
+          default:tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);i=0;break;
         }
 
 
