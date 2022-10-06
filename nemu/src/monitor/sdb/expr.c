@@ -52,13 +52,13 @@ static struct rule {
    */
 
   {" +", TK_NOTYPE},    // spaces
-  {"^\\+$", TK_jia},         // plus
+  {"\\+", TK_jia},         // plus
   {"==", TK_EQ},        // equal
-  {"^(0x).{1,8}$", TK_DZ},  //16jinzhi
+  {"(0x).{1,8}", TK_DZ},  //16jinzhi
   {"\\*",TK_MU},          // multiply
   {"\\-",TK_Jian},        //jianfa
   {"\\/",TK_Chu},         //chufa
-  {"^\\$[^0-9][a-z0-9]+$",TK_Reg},         //reg_value
+  {"\\$[^0-9][a-z0-9]+",TK_Reg},         //reg_value
   {"\\(", TK_zuo},
   {"\\)",TK_you},
   {"[1-9][0-9]*",TK_num},
