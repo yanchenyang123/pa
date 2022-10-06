@@ -123,7 +123,7 @@ static bool make_token(char *e) {
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
-        printf("%d",position);
+        printf("%d,%s",position,&e[position]);
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
@@ -131,7 +131,7 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default:tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);printf("%s",tokens[nr_token].str);break;
+          default:tokens[nr_token].type=rules[i].token_type;substr(substr_start,substr_len);break;
         }
 
 
