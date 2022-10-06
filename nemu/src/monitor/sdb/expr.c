@@ -224,7 +224,7 @@ int NBL_ZYSF(int p,int q)
                     index=i;
                   }
               }
-            else if(tokens[i].type==TK_Chu||tokens[i].type==TK_MU)
+            else if(tokens[index].type==TK_Chu||tokens[index].type==TK_MU)
               {
                 index=i;
               }
