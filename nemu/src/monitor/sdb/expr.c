@@ -138,9 +138,9 @@ static bool make_token(char *e) {
         }
       else
       {
-      tokens[nr_token].type=rules[i].token_type;
-      nr_token+=1;
-      substr(substr_start,substr_len);
+          tokens[nr_token].type=rules[i].token_type;
+          substr(substr_start,substr_len);
+          nr_token+=1;
       break;
       }
 
@@ -302,7 +302,7 @@ paddr_t expr(char *e, bool *success)
   }
   int p=0;
   int q=nr_token-1;
-  for(int i=0;i<nr_token;i++)
+  for(int i=0;i<=nr_token;i++)
     {
       printf("%s\n",tokens[i].str);
     }
