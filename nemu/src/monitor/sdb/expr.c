@@ -204,7 +204,7 @@ int NBL_ZYSF(int p,int q)
         if(tokens[i].type==TK_zuo)
           {
             num=1;
-            for(int j=i;j<=q;j++)
+            for(int j=i+1;j<=q;j++)
               {
                 if(tokens[j].type==TK_zuo)
                   {
@@ -304,22 +304,48 @@ paddr_t f(int p,int q)
 }
 return 0;
   }
-void panduan_cheng_derd()
-  {
-    for(int i=0;i<nr_token;i++)
-      {
-        if(tokens[i].type==TK_MU&&(i==0||tokens[i-1].type==))
-          {
 
-          }
-      }
-  }
 paddr_t expr(char *e, bool *success) 
 {
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
+ for(int i=0;i<nr_token;i++)
+      {
+         int point =0;
+        if(tokens[i].type==TK_MU)
+          {
+            if(i==0)
+              {
+                tokens[i].type=TK_DEREF;
+                break; 
+              }
+            else  
+            {
+                point =i-1;
+            }
+            if(tokens[i-1].type==TK_NOTYPE)
+              {
+                point -=1;
+              }
+            if(point==-1)
+              {
+                tokens[i].type=TK_DEREF;
+                break;
+
+              }
+            else if(tokens[point].type==TK_Chu||tokens[point].type==TK_jia||tokens[point].type==TK_Jian||tokens[point].type==TK_MU)
+              {
+                tokens[i].type=TK_DEREF;
+                break;
+              }
+          }
+        else  
+          {
+            continue;
+          }
+      }
   int p=0;
   int q=nr_token-1;
   /* TODO: Insert codes to evaluate the expression. */
