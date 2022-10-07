@@ -369,7 +369,7 @@ paddr_t expr(char *e, bool *success)
   int q=nr_token-1;
   /* TODO: Insert codes to evaluate the expression. */
   paddr_t a=f(p,q);
-  printf("%d",a);
+  printf("%d\n",a);
   return f(p,q);
 }
 
