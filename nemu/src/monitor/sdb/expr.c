@@ -211,6 +211,7 @@ bool check_parentheses(int p,int q)
 int NBL_ZYSF(int p,int q)
   {
     int index=0;
+    int zhi_zhen=0;
     for(int i=p;i<=q;i++)
       {
         int num=0;
@@ -234,7 +235,14 @@ int NBL_ZYSF(int p,int q)
                   }
               }
           }
-        else if(index==0&&(tokens[i].type==TK_Chu||tokens[i].type==TK_MU||tokens[i].type==TK_jia||tokens[i].type==TK_Jian||tokens[i].type==TK_EQ 
+        if(tokens[i].type==TK_DEREF)
+          {
+            index=i;
+            zhi_zhen=1;
+          }
+        if(zhi_zhen==0)
+          {
+        if(index==0&&(tokens[i].type==TK_Chu||tokens[i].type==TK_MU||tokens[i].type==TK_jia||tokens[i].type==TK_Jian||tokens[i].type==TK_EQ 
         ||tokens[i].type==TK_NQ||tokens[i].type==TK_YU))
           {
             index=i;
@@ -268,6 +276,8 @@ int NBL_ZYSF(int p,int q)
                 index=i;
               }
           }
+          }
+
       }
     return index;
   }
@@ -316,8 +326,17 @@ paddr_t f(int p,int q)
         int op;
         paddr_t val1,val2;
         op=NBL_ZYSF(p,q);
-        val1=f(p,op-1);
-        val2=f(op+1,q);
+        if(op==0)
+          { 
+            val1=0;
+            val2=f(op+1,q);
+          }
+        else
+          {
+          val1=f(p,op-1);
+          val2=f(op+1,q);
+          }
+
         
           switch(tokens[op].type)
             {
@@ -368,7 +387,8 @@ paddr_t expr(char *e, bool *success)
                 break;
 
               }
-            else if(tokens[point].type==TK_Chu||tokens[point].type==TK_jia||tokens[point].type==TK_Jian||tokens[point].type==TK_MU)
+            else if(tokens[point].type==TK_Chu||tokens[point].type==TK_jia||tokens[point].type==TK_Jian||tokens[point].type==TK_MU||tokens[point].type==TK_EQ
+            ||tokens[point].type==TK_NQ||tokens[point].type==TK_YU)
               {
                 tokens[i].type=TK_DEREF;
                 break;
