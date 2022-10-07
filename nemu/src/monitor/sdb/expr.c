@@ -105,6 +105,14 @@ static void substr(char *str_start,int length)
       }
   }
 
+static void substr_(char *str_start,int length)
+  {
+    for(int j=0;j<length-1;j++)
+      {
+        tokens[nr_token].str[j]=str_start[j+1];
+      }
+  }
+
 static bool make_token(char *e) {
   int position = 0;
   int i;
@@ -132,8 +140,7 @@ static bool make_token(char *e) {
       if(rules[i].token_type==TK_Reg)
         {
           tokens[nr_token].type=rules[i].token_type;
-          printf("1\n");
-          substr(substr_start+1,substr_len);
+          substr_(substr_start,substr_len);
           printf("%s",tokens[nr_token].str);
           nr_token+=1;
 
