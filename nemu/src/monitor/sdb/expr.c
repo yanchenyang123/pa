@@ -164,7 +164,7 @@ bool check_parentheses(int p,int q)
     int num=0;
     if(tokens[p].type==TK_zuo && tokens[q].type==TK_you)
       {
-        for(int i=p+1;i<q;i++)
+        for(int i=p+1;i<=q;i++)
           {
             if(tokens[i].type==TK_zuo)
               {
