@@ -221,15 +221,31 @@ int NBL_ZYSF(int p,int q)
                   }
               }
           }
-        else if(index==0&&(tokens[i].type==TK_Chu||tokens[i].type==TK_MU||tokens[i].type==TK_jia||tokens[i].type==TK_Jian))
+        else if(index==0&&(tokens[i].type==TK_Chu||tokens[i].type==TK_MU||tokens[i].type==TK_jia||tokens[i].type==TK_Jian||tokens[i].type==TK_EQ 
+        ||tokens[i].type==TK_NQ||tokens[i].type==TK_YU))
           {
             index=i;
           }
-        else if(index!=0&&(tokens[i].type==TK_Chu||tokens[i].type==TK_MU||tokens[i].type==TK_jia||tokens[i].type==TK_Jian))
+        else if(index!=0&&(tokens[i].type==TK_Chu||tokens[i].type==TK_MU||tokens[i].type==TK_jia||tokens[i].type==TK_Jian||tokens[i].type==TK_EQ 
+        ||tokens[i].type==TK_NQ||tokens[i].type==TK_YU))
           {
-            if(tokens[index].type==TK_jia||tokens[index].type==TK_Jian)
+            if(tokens[index].type==TK_YU)
               {
-                if(tokens[i].type==TK_jia||tokens[i].type==TK_Jian)
+                if(tokens[i].type==TK_YU)
+                  {
+                    index=i;
+                  }
+              }
+            else if(tokens[index].type==TK_EQ||tokens[index].type==TK_NQ)   
+              {
+                if(tokens[i].type==TK_YU||tokens[i].type==TK_EQ||tokens[i].type==TK_NQ)
+                  {
+                    index=i;
+                  }
+              }
+            else if(tokens[index].type==TK_jia||tokens[index].type==TK_Jian)
+              {
+                if(tokens[i].type==TK_jia||tokens[i].type==TK_Jian||tokens[i].type==TK_YU||tokens[i].type==TK_EQ||tokens[i].type==TK_NQ)
                   {
                     index=i;
                   }
@@ -296,6 +312,9 @@ paddr_t f(int p,int q)
             case TK_jia:return val1+val2;
             case TK_Jian:return val1-val2;
             case TK_MU: return val1*val2;
+            case TK_YU: return val1&&val2;
+            case TK_EQ: return val1==val2;
+            case TK_NQ: return val1 != val2;
             default:assert(0);
             }
         
