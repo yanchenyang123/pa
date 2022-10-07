@@ -162,10 +162,23 @@ bool check_parentheses(int p,int q)
   { 
 
     int num=0;
+    int is_touble=0;
     if(tokens[p].type==TK_zuo && tokens[q].type==TK_you)
       {
-        for(int i=p+1;i<=q;i++)
+        for(int i=p+1;i<q;i++)
           {
+            if(num==1&&is_touble==0)
+              {
+                is_touble=1;
+              }
+            else if(is_touble==1&&num==0)
+              {
+                is_touble=2;
+              }
+            else if(is_touble==2&&num!=0)
+              {
+                return false;
+              }
             if(tokens[i].type==TK_zuo)
               {
                 num+=1;
