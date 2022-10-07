@@ -200,12 +200,21 @@ int NBL_ZYSF(int p,int q)
     int index=0;
     for(int i=p;i<=q;i++)
       {
-        printf("%d\n",i);
+        int num=0;
         if(tokens[i].type==TK_zuo)
           {
+            num=1;
             for(int j=i;j<=q;j++)
               {
+                if(tokens[j].type==TK_zuo)
+                  {
+                    num+=1;
+                  }
                 if(tokens[j].type==TK_you)
+                  {
+                    num-=1;
+                  }
+                if(num==0)
                   {
                     i=j;
                     break;
