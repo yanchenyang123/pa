@@ -105,13 +105,13 @@ static void substr(char *str_start,int length)
       }
   }
 
-/*static void substr_(char *str_start,int length)
+static void substr_(char *str_start,int length)
   {
     for(int j=0;j<length-1;j++)
       {
         tokens[nr_token].str[j]=str_start[j+1];
       }
-  }*/
+  }
 
 static bool make_token(char *e) {
   int position = 0;
@@ -140,7 +140,7 @@ static bool make_token(char *e) {
       if(rules[i].token_type==TK_Reg)
         {
           tokens[nr_token].type=rules[i].token_type;
-          substr(substr_start,substr_len);
+          substr_(substr_start,substr_len);
           printf("%s",tokens[nr_token].str);
           nr_token+=1;
 
@@ -309,7 +309,6 @@ paddr_t f(int p,int q)
             };
             case TK_Reg:
             {
-              printf("1\n");
               return isa_reg_str2val(tokens[p].str,NULL);
             };
             case TK_num:
