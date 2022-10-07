@@ -200,6 +200,7 @@ int NBL_ZYSF(int p,int q)
     int index=0;
     for(int i=p;i<=q;i++)
       {
+        printf("%d\n",i);
         if(tokens[i].type==TK_zuo)
           {
             for(int j=i;j<=q;j++)
