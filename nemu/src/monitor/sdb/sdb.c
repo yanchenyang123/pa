@@ -155,6 +155,10 @@ static int cmd_info(char *args)
       isa_reg_display();
       
      }
+    else if(strcmp(token,"w"))
+      {
+        return 0;
+      }
     else
       {
         printf("Unknown command info %s\n",token);
