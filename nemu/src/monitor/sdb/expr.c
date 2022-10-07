@@ -304,6 +304,16 @@ paddr_t f(int p,int q)
 }
 return 0;
   }
+void panduan_cheng_derd()
+  {
+    for(int i=0;i<nr_token;i++)
+      {
+        if(tokens[i].type==TK_MU&&(i==0||tokens[i-1].type==))
+          {
+
+          }
+      }
+  }
 paddr_t expr(char *e, bool *success) 
 {
   if (!make_token(e)) {
