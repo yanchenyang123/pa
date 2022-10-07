@@ -133,7 +133,9 @@ static bool make_token(char *e) {
         {
           tokens[nr_token].type=rules[i].token_type;
           substr(substr_start+1,substr_len);
+          printf("%s",tokens[nr_token].str);
           nr_token+=1;
+
           break;
         }
       else
