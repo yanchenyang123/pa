@@ -302,7 +302,7 @@ paddr_t expr(char *e, bool *success)
   }
   int p=0;
   int q=nr_token-1;
-  for(int i=0;i<=nr_token;i++)
+  for(int i=0;i<nr_token;i++)
     {
       printf("%s\n",tokens[i].str);
     }
