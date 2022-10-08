@@ -306,7 +306,7 @@ paddr_t f(int p,int q)
             case TK_DZ: 
             {
               sscanf(tokens[p].str,"%x",&index);
-              return index;             
+              return (unsigned int) index;             
             };
             case TK_Reg:
             {
