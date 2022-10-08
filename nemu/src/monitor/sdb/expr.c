@@ -340,12 +340,13 @@ paddr_t f(int p,int q)
         int op;
         paddr_t val1,val2;
         op=NBL_ZYSF(p,q);
-        if(op==0)
+        if(op==0||(op==1&&tokens[0].type==TK_NOTYPE))
           { 
             val1=0;
             val2=f(op+1,q);
           }
-        else
+        else 
+
           {
           val1=f(p,op-1);
           val2=f(op+1,q);
