@@ -168,7 +168,7 @@ static int cmd_info(char *args)
       isa_reg_display();
       
      }
-    else if(strcmp(token,"w"))
+    else if(strcmp(token,"w")==0)
       {
         p_all_points();
       }
