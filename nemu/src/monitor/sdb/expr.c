@@ -311,6 +311,7 @@ paddr_t f(int p,int q)
             {
               _Bool *succese1;
               succese1=(_Bool *)true;
+              printf("%x\n",isa_reg_str2val(tokens[p].str,succese1));
               return isa_reg_str2val(tokens[p].str,succese1);
             };
             case TK_num:
