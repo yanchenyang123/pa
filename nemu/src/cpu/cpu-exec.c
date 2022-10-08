@@ -40,7 +40,6 @@ typedef struct watchpoint {
   paddr_t old_number;
   paddr_t new_number;
 
-
   /* TODO: Add more members if necessary */
 
 } WP;
@@ -50,6 +49,7 @@ extern WP wp_pool;
 WP* new_wp(char *e);
 
 paddr_t expr(char *e,bool *success);
+void init_wp_pool();
 void sdb_mainloop();
 void device_update();
 
