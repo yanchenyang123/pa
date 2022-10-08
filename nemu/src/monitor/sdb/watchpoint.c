@@ -21,7 +21,8 @@ typedef struct watchpoint {
   int NO;
   struct watchpoint *next;
   char *e;
-
+  paddr_t old_number;
+  paddr_t new_number;
 
   /* TODO: Add more members if necessary */
 
@@ -29,13 +30,15 @@ typedef struct watchpoint {
 
 static WP wp_pool[NR_WP] = {};
 static WP *head = NULL, *free_ = NULL;
-static int index_=0;
+int index_=0;
 void init_wp_pool() {
   int i;
   for (i = 0; i < NR_WP; i ++) {
     wp_pool[i].NO = i;
     wp_pool[i].next = (i == NR_WP - 1 ? NULL : &wp_pool[i + 1]);
     wp_pool[i].e=NULL;
+    wp_pool[i].old_number=0;
+    wp_pool[i].new_number=0;
   }
 
   head = NULL;
@@ -53,6 +56,8 @@ WP* new_wp(char *expr)
     node->e=expr;
     free_=free_->next;
     node->next=node_nul;
+    node->new_number=0;
+    node->old_number=0;
     index_+=1;
 
     if(head==NULL)
@@ -87,6 +92,13 @@ void free_wp(WP *wp)
     free_=node;
     head=pa;
     
+  }
+void p_all_points()
+  {
+    for(int i=0;i<NR_WP;i++)
+      {
+        printf("wp_pool %d  %d   %s\n",i,wp_pool[i].old_number,wp_pool[i].e);
+      }
   }
 
 

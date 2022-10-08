@@ -22,6 +22,8 @@
 #include<common.h>
 #include <memory/paddr.h>
 
+
+
 enum {
   TK_NOTYPE = 256,
   TK_jia,
@@ -310,6 +312,7 @@ paddr_t f(int p,int q)
             {
               _Bool *succese1;
               succese1=(_Bool *)true;
+              
               return isa_reg_str2val(tokens[p].str,succese1);
             };
             case TK_num:

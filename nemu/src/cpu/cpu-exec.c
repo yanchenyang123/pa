@@ -30,6 +30,27 @@ uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 
+
+
+/*diao yong wp zhong shengmingde*/
+typedef struct watchpoint {
+  int NO;
+  struct watchpoint *next;
+  char *e;
+  paddr_t old_number;
+  paddr_t new_number;
+
+
+  /* TODO: Add more members if necessary */
+
+} WP;
+extern WP *head;
+extern WP *free_;
+extern WP wp_pool;
+WP* new_wp(char *e);
+
+paddr_t expr(char *e,bool *success);
+void sdb_mainloop();
 void device_update();
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
@@ -38,8 +59,19 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
-  
-  
+  while(head!=NULL)
+    {
+      head->new_number=expr(head->e,(_Bool *)true);
+      if(head->new_number!=head->old_number)
+        {
+          nemu_state.state=NEMU_STOP;
+          Log("Trigger of the monitoring points");
+          sdb_mainloop();
+          break;
+        }
+      head->old_number=head->new_number;
+    } 
+
 }
 
 static void exec_once(Decode *s, vaddr_t pc) {

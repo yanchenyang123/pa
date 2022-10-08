@@ -20,10 +20,22 @@
 #include "sdb.h"
 #include <memory/paddr.h>
 #include <stdbool.h>
-static int is_batch_mode = false;
+typedef struct watchpoint {
+  int NO;
+  struct watchpoint *next;
+  char *e;
 
+
+  /* TODO: Add more members if necessary */
+
+} WP;
+static int is_batch_mode = false;
+extern WP *head;
+extern WP *free_;
+extern WP wp_pool;
 void init_regex();
 void init_wp_pool();
+void p_all_points();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -157,7 +169,7 @@ static int cmd_info(char *args)
      }
     else if(strcmp(token,"w"))
       {
-        return 0;
+        p_all_points();
       }
     else
       {
@@ -205,6 +217,8 @@ static int cmd_p(char *args)
 
 static int cmd_w(char *args)
    {
+
+    
     return 0;
    }
 static int cmd_d(char *args)
