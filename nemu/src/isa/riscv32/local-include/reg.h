@@ -17,7 +17,6 @@
 #define __RISCV32_REG_H__
 
 #include <common.h>
-word_t isa_reg_str2val(const char *s, bool *success);
 static inline int check_reg_idx(int idx) {
   IFDEF(CONFIG_RT_CHECK, assert(idx >= 0 && idx < 32));
   return idx;

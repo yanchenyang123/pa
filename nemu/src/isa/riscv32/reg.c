@@ -35,5 +35,5 @@ word_t isa_reg_str2val(const char *s, bool *success) {
     { 
       printf("%s      0x%x       %d\n",regs[i],gpr(i),gpr(i));
     }
-    return gpr(1);
+    return gpr(5);
       }
