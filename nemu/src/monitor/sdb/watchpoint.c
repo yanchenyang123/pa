@@ -49,11 +49,12 @@ WP* new_wp(char *expr)
       {
         assert(0);
       }
-    node=&wp_pool[index_];
+    node=free_;
     node->e=expr;
+    free_=free_->next;
     node->next=node_nul;
     index_+=1;
-    free_=free_->next;
+
     if(head==NULL)
       {
         head=node;
@@ -75,18 +76,17 @@ void free_wp(WP *wp)
   {
     WP *pa=head;
 
-    while (head!=wp&&head!=NULL)
+    while (head->next!=wp&&head->next!=NULL)
     {
       head=head->next;
-      if(head==NULL)
-        {
-          assert(0);
-        }
+      assert(head->next!=NULL);
     }
-    free_=head;
-    index_-=1;
-    head->next=NULL;
+    WP *node=head->next;
+    head->next=node->next;
+    node->next=free_->next;
+    free_=node;
     head=pa;
+    
   }
 
 
