@@ -36,10 +36,10 @@ word_t isa_reg_str2val(const char *s, bool *success) {
       if(strncmp(s,regs[i],3)==0)
         {
 
-          *success=true;
+          success=(_Bool *)true;
           return gpr(i);
         }
     }
-    *success=false;
+    success=(_Bool *)false;
     assert(0);
       }
