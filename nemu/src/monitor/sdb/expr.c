@@ -21,6 +21,7 @@
 #include<assert.h>
 #include<common.h>
 #include <memory/paddr.h>
+
 enum {
   TK_NOTYPE = 256,
   TK_jia,
@@ -360,7 +361,6 @@ paddr_t f(int p,int q)
             default:assert(0);
             }
         
-  
   
 }
 return 0;

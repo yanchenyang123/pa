@@ -74,6 +74,7 @@ WP* new_wp(char *expr)
 void free_wp(WP *wp)
   {
     WP *pa=head;
+    
     while (head->next!=wp&&head->next!=NULL)
     {
       head=head->next;
