@@ -59,7 +59,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
-  while(head!=NULL)
+  /*while(head!=NULL)
     {
       head->new_number=expr(head->e,(_Bool *)true);
       if(head->new_number!=head->old_number)
@@ -71,7 +71,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
         }
       head->old_number=head->new_number;
     } 
-
+  */
 }
 
 static void exec_once(Decode *s, vaddr_t pc) {
