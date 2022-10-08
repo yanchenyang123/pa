@@ -32,12 +32,12 @@ typedef struct watchpoint {
 static int is_batch_mode = false;
 extern WP *head;
 extern WP *free_;
-extern WP wp_pool;
+extern WP wp_pool[32];
 void init_regex();
 void init_wp_pool();
 void p_all_points();
 WP* new_wp(char *e);
-WP* free_loop(WP* wp);
+WP* free_wp(int i);
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
@@ -223,6 +223,9 @@ static int cmd_w(char *args)
    }
 static int cmd_d(char *args)
   {
+    int wp_index;
+    sscanf(args,"%d",&wp_index);
+    free_wp(wp_index);
     return 0;
   }
 void sdb_set_batch_mode() {

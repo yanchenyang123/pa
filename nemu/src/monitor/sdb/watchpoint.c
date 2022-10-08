@@ -22,7 +22,7 @@ typedef struct watchpoint {
   struct watchpoint *next;
   char *e;
   paddr_t old_number;
-  paddr_t new_number;
+  bool if_is_open;
 
   /* TODO: Add more members if necessary */
 
@@ -30,7 +30,6 @@ typedef struct watchpoint {
 
 static WP wp_pool[NR_WP] = {};
 static WP *head = NULL, *free_ = NULL;
-int index_=0;
 void init_wp_pool() {
   int i;
   for (i = 0; i < NR_WP; i ++) {
@@ -38,59 +37,54 @@ void init_wp_pool() {
     wp_pool[i].next = (i == NR_WP - 1 ? NULL : &wp_pool[i + 1]);
     wp_pool[i].e=NULL;
     wp_pool[i].old_number=0;
-    wp_pool[i].new_number=0;
+    wp_pool[i].if_is_open=0;
   }
 
   head = NULL;
   free_ = wp_pool;
 }
-WP* new_wp(char *expr)
+WP* new_wp(char *exp)
   {
-    WP* node=NULL;
-    WP* node_nul=NULL;
-    if(index_==32)
+    int t=-1;
+    for(int i=0;i<NR_WP;i++)
+      {
+        if(wp_pool[i].if_is_open==0)
+          {
+            if(i==0)
+              {
+                wp_pool[0].e=exp;
+                wp_pool[0].if_is_open=1;
+                wp_pool[0].old_number=expr(exp,(_Bool *)true);
+                head=&wp_pool[0];
+                free_=&wp_pool[1];
+                t=0;
+                break;
+              }
+            else
+              {
+                wp_pool[i].e=exp;
+                wp_pool[i].old_number=expr(exp,(_Bool *)true);
+                wp_pool[i].if_is_open=1;
+                free_=&wp_pool[i+1];
+                t=i;
+                break;
+
+              }
+
+          }
+      }
+    if(t==-1)
       {
         assert(0);
       }
-    node=free_;
-    node->e=expr;
-    free_=free_->next;
-    node->next=node_nul;
-    node->new_number=0;
-    node->old_number=0;
-    index_+=1;
-
-    if(head==NULL)
-      {
-        head=node;
-      }
-    else 
-      {
-        WP* pa =head;
-        while(head->next!=NULL)
-          {
-            head=head->next;
-          }
-        head->next=node;
-        head=pa;
-      }
-    return node;
-     
+    return &wp_pool[t];
   }
-void free_wp(WP *wp)
+void free_wp(int i)
   {
-    WP *pa=head;
+    wp_pool[i].if_is_open=0;
+    wp_pool[i].e=NULL;
+    wp_pool[i].old_number=0;
 
-    while (head->next!=wp&&head->next!=NULL)
-    {
-      head=head->next;
-      assert(head->next!=NULL);
-    }
-    WP *node=head->next;
-    head->next=node->next;
-    node->next=free_->next;
-    free_=node;
-    head=pa;
     
   }
 void p_all_points()
