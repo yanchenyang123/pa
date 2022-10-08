@@ -309,7 +309,8 @@ paddr_t f(int p,int q)
             };
             case TK_Reg:
             {
-              return isa_reg_str2val(tokens[p].str,NULL);
+              bool * succese=(bool *)true;
+              return isa_reg_str2val(tokens[p].str,succese);
             };
             case TK_num:
             {

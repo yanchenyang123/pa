@@ -33,7 +33,11 @@ void isa_reg_display() {
 word_t isa_reg_str2val(const char *s, bool *success) {
       for(int i=0;i<32;i+=1)
     { 
-      printf("%s      0x%x       %d\n",regs[i],gpr(i),gpr(i));
+      if(strcmp(s,regs[i])==0)
+        {
+          *success=true;
+          return gpr(i);
+        }
     }
-    return gpr(5);
+    assert(0);
       }
