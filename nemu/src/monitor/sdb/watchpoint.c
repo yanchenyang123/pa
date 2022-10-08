@@ -94,7 +94,20 @@ void p_all_points()
         printf("wp_pool %d  %d   %s\n",i,wp_pool[i].old_number,wp_pool[i].e);
       }
   }
-
+bool bianhua_()
+  {
+    for(int i=0;i<NR_WP;i++)
+      {
+        if(wp_pool[i].if_is_open)
+          {
+            if(wp_pool[i].old_number!=expr(wp_pool[i].e,(_Bool *)true))
+              {
+                return true;
+              }
+          }
+      }
+    return false;
+  }
 
 /* TODO: Implement the functionality of watchpoint */
 
