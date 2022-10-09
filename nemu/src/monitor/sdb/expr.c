@@ -200,7 +200,7 @@ bool check_parentheses(int p,int q)
               }
             if(num<0)
               {
-                assert(0);
+                return false;
               }
           }
         if(num!=0)
