@@ -283,8 +283,8 @@ paddr_t f(int p,int q)
           {
             case TK_DZ: 
             {
-              sscanf(tokens[p].str,"%u",&index);
-              return (paddr_t) index;             
+              index=strtoul(tokens[p].str,NULL,0);
+              return index;             
             };
             case TK_Reg:
             {
@@ -296,6 +296,7 @@ paddr_t f(int p,int q)
             case TK_num:
             {
               sscanf(tokens[p].str,"%u",&index);
+
               return index;
             };
           }
