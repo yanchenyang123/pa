@@ -310,7 +310,6 @@ paddr_t f(int p,int q)
         {
           int next_op=p+1;
           paddr_t val3;
-          paddr_t val4;
           int jieshu=0;
           while(jieshu==0)
             {
@@ -347,8 +346,15 @@ paddr_t f(int p,int q)
                 jieshu=1;
               }           
             }
-          val4=f(next_op+2,q);
-          switch(tokens[next_op+1].type)
+          if(next_op==q)
+            {
+              return paddr_read(val3,4);
+            }
+          else
+            {
+            paddr_t val4;
+            val4=f(next_op+2,q);
+            switch(tokens[next_op+1].type)
             {
             case TK_Chu:return paddr_read(val3,4)/val4;
             case TK_jia:return paddr_read(val3,4)+val4;
@@ -360,7 +366,7 @@ paddr_t f(int p,int q)
             default:assert(0);
             }
 
-          
+            }
           
         }
       else {
