@@ -207,7 +207,6 @@ bool check_parentheses(int p,int q)
 int NBL_ZYSF(int p,int q)
   {
     int index=0;
-    int zhi_zhen=0;
     for(int i=p;i<=q;i++)
       {
         int num=0;
@@ -231,13 +230,7 @@ int NBL_ZYSF(int p,int q)
                   }
               }
           }
-        if(tokens[i].type==TK_DEREF)
-          {
-            index=i;
-            zhi_zhen=1;
-          }
-        if(zhi_zhen==0)
-          {
+
         if(index==0&&(tokens[i].type==TK_Chu||tokens[i].type==TK_MU||tokens[i].type==TK_jia||tokens[i].type==TK_Jian||tokens[i].type==TK_EQ 
         ||tokens[i].type==TK_NQ||tokens[i].type==TK_YU))
           {
@@ -272,7 +265,7 @@ int NBL_ZYSF(int p,int q)
                 index=i;
               }
           }
-          }
+          
 
       }
     return index;
@@ -313,6 +306,63 @@ paddr_t f(int p,int q)
         */
         return f(p + 1, q - 1);
         }
+      else if(tokens[p].type==TK_DEREF)
+        {
+          int next_op=p+1;
+          paddr_t val3;
+          paddr_t val4;
+          int jieshu=0;
+          while(jieshu==0)
+            {
+              if(tokens[next_op].type==TK_NOTYPE)
+                {
+                  next_op+=1;
+                }  
+              else if(tokens[next_op].type==TK_zuo)
+                {
+                  int num=1;
+                  for(int i=next_op+1;i<=q;i++)
+                  {
+                  if(tokens[i].type==TK_zuo)
+                    {
+                      num+=1;
+                    }
+                  else if(tokens[i].type==TK_you)
+                    {
+                      num-=1;
+                    }
+                  if(num==0)
+                    {
+                      jieshu=1;
+                      next_op=i;
+                      break;
+                    }
+                  }
+                val3=f(p+1,next_op);
+              }
+              else
+              {
+                next_op=p+1;
+                val3=f(p+1,next_op);
+                jieshu=1;
+              }           
+            }
+          val4=f(next_op+2,q);
+          switch(tokens[next_op+1].type)
+            {
+            case TK_Chu:return paddr_read(val3,4)/val4;
+            case TK_jia:return paddr_read(val3,4)+val4;
+            case TK_Jian:return paddr_read(val3,4)-val4;
+            case TK_MU: return paddr_read(val3,4)*val4;
+            case TK_YU: return paddr_read(val3,4)&&val4;
+            case TK_EQ: return paddr_read(val3,4)==val4;
+            case TK_NQ: return paddr_read(val3,4)!=val4;
+            default:assert(0);
+            }
+
+          
+          
+        }
       else {
         if(tokens[p].type==TK_NOTYPE)
           {
@@ -347,7 +397,6 @@ paddr_t f(int p,int q)
             case TK_YU: return val1&&val2;
             case TK_EQ: return val1==val2;
             case TK_NQ: return val1 != val2;
-            case TK_DEREF: return paddr_read(val2,4);
             default:assert(0);
             }
         
