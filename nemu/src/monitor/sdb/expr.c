@@ -283,7 +283,7 @@ paddr_t f(int p,int q)
           {
             case TK_DZ: 
             {
-              sscanf(tokens[p].str,"%x",&index);
+              sscanf(tokens[p].str,"%u",&index);
               return (paddr_t) index;             
             };
             case TK_Reg:
@@ -295,7 +295,7 @@ paddr_t f(int p,int q)
             };
             case TK_num:
             {
-              sscanf(tokens[p].str,"%d",&index);
+              sscanf(tokens[p].str,"%u",&index);
               return index;
             };
           }
@@ -457,7 +457,7 @@ paddr_t expr(char *e, bool *success)
   int q=nr_token-1;
   /* TODO: Insert codes to evaluate the expression. */
   paddr_t a=f(p,q);
-  printf("%d\n",a);
+  printf("%u\n",a);
   return a;
 }
 
