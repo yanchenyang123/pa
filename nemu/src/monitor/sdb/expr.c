@@ -308,46 +308,8 @@ paddr_t f(int p,int q)
         }
       else if(tokens[p].type==TK_DEREF&&NBL_ZYSF(p,q)==0)
         {
-          int next_op=p+1;
           paddr_t val3;
-          int jieshu=0;
-          while(jieshu==0)
-            {
-              if(tokens[next_op].type==TK_NOTYPE)
-                {
-                  next_op+=1;
-                }  
-              else if(tokens[next_op].type==TK_zuo)
-                {
-                  int num=1;
-                  for(int i=next_op+1;i<=q;i++)
-                  {
-                  if(tokens[i].type==TK_zuo)
-                    {
-                      num+=1;
-                    }
-                  else if(tokens[i].type==TK_you)
-                    {
-                      num-=1;
-                    }
-                  if(num==0)
-                    {
-                      jieshu=1;
-                      next_op=i;
-                      break;
-                    }
-                  }
-              }
-              else
-              {
-                jieshu=1;
-              }           
-            }
-          if(next_op!=q&&tokens[next_op+1].type==TK_NOTYPE)
-            {
-              next_op+=1;
-            }
-          val3=f(p+1,next_op);
+          val3=f(p+1,q);
           return paddr_read(val3,4);
           
         }
@@ -514,11 +476,6 @@ paddr_t expr(char *e, bool *success)
   /* TODO: Insert codes to evaluate the expression. */
   paddr_t a=f(p,q);
   printf("%u\n",a);
-  for(int i=0;i<nr_token;i++)
-    {
-      printf("%d",tokens[i].type);
-      printf("\n");
-    }
   return a;
 }
 
