@@ -317,7 +317,7 @@ paddr_t f(int p,int q)
         {
           paddr_t val4;
           val4=f(p+1,q);
-          return 4294967295-val4+1;
+          return 4294967296-val4;
         }
       else {
         if(tokens[p].type==TK_NOTYPE)
