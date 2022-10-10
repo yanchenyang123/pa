@@ -443,6 +443,7 @@ paddr_t expr(char *e, bool *success)
  for(int i=0;i<nr_token;i++)
       {
         int point =0;
+        int point1=0;
         if(tokens[i].type==TK_Jian)
           {
             if(i==0)
@@ -452,19 +453,19 @@ paddr_t expr(char *e, bool *success)
               }
             else
               {
-                point=i-1;
+                point1=i-1;
               }
             if(tokens[i-1].type==TK_NOTYPE)
               {
-                point-=1;
+                point1-=1;
               }
-            if(point==-1)
+            if(point1==-1)
               {
                 tokens[i].type=TK_FU;
                 continue;
               }
-            else if(tokens[point].type==TK_Chu||tokens[point].type==TK_jia||tokens[point].type==TK_Jian||tokens[point].type==TK_MU||tokens[point].type==TK_EQ
-            ||tokens[point].type==TK_NQ||tokens[point].type==TK_YU||tokens[point].type==TK_zuo)
+            else if(tokens[point1].type==TK_Chu||tokens[point1].type==TK_jia||tokens[point1].type==TK_Jian||tokens[point1].type==TK_MU||tokens[point1].type==TK_EQ
+            ||tokens[point1].type==TK_NQ||tokens[point1].type==TK_YU||tokens[point1].type==TK_zuo)
               {
                 tokens[i].type=TK_FU;
                 continue;
