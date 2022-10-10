@@ -278,7 +278,7 @@ paddr_t f(int p,int q)
         }
       else if (p == q) 
       {
-        unsigned int index=0;
+        int index=0;
         switch (tokens[p].type)
           {
             case TK_DZ: 
