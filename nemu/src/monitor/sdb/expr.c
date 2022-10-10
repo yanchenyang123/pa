@@ -323,7 +323,7 @@ paddr_t f(int p,int q)
               val4=val4/10;
             }
           printf("%d\n",val4);
-          return -f(p+1,q);
+          return -val4;
         }
       else {
         if(tokens[p].type==TK_NOTYPE)
