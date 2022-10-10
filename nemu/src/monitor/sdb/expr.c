@@ -388,7 +388,7 @@ paddr_t expr(char *e, bool *success)
                 continue;
               }
             else if(tokens[point1].type==TK_Chu||tokens[point1].type==TK_jia||tokens[point1].type==TK_Jian||tokens[point1].type==TK_MU||tokens[point1].type==TK_EQ
-            ||tokens[point1].type==TK_NQ||tokens[point1].type==TK_YU||tokens[point1].type==TK_zuo)
+            ||tokens[point1].type==TK_NQ||tokens[point1].type==TK_YU||tokens[point1].type==TK_zuo||tokens[point1].type==TK_DEREF)
               {
                 tokens[i].type=TK_FU;
                 continue;
