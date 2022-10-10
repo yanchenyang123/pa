@@ -38,7 +38,8 @@ enum {
   TK_num,
   TK_NQ,
   TK_YU,
-  TK_DEREF
+  TK_DEREF,
+  TK_FU
 
   /* TODO: Add more token types */
 
@@ -350,6 +351,51 @@ paddr_t f(int p,int q)
           return paddr_read(val3,4);
           
         }
+      else if(tokens[p].type==TK_FU&&NBL_ZYSF(p,q)==0)
+        {
+          int next_op=p+1;
+          paddr_t val3;
+          int jieshu=0;
+          while(jieshu==0)
+            {
+              if(tokens[next_op].type==TK_NOTYPE)
+                {
+                  next_op+=1;
+                }  
+              else if(tokens[next_op].type==TK_zuo)
+                {
+                  int num=1;
+                  for(int i=next_op+1;i<=q;i++)
+                  {
+                  if(tokens[i].type==TK_zuo)
+                    {
+                      num+=1;
+                    }
+                  else if(tokens[i].type==TK_you)
+                    {
+                      num-=1;
+                    }
+                  if(num==0)
+                    {
+                      jieshu=1;
+                      next_op=i;
+                      break;
+                    }
+                  }
+              }
+              else
+              {
+                jieshu=1;
+              }           
+            }
+          if(next_op!=q&&tokens[next_op+1].type==TK_NOTYPE)
+            {
+              next_op+=1;
+            }
+          val3=f(p+1,next_op);
+          return 0-val3;
+          
+        }
       else {
         if(tokens[p].type==TK_NOTYPE)
           {
@@ -397,6 +443,38 @@ paddr_t expr(char *e, bool *success)
  for(int i=0;i<nr_token;i++)
       {
         int point =0;
+        if(tokens[i].type==TK_Jian)
+          {
+            if(i==0)
+              {
+                tokens[i].type=TK_FU;
+                continue;
+              }
+            else
+              {
+                point=i-1;
+              }
+            if(tokens[i-1].type==TK_NOTYPE)
+              {
+                point-=1;
+              }
+            if(point==-1)
+              {
+                tokens[i].type=TK_FU;
+                continue;
+              }
+            else if(tokens[point].type==TK_Chu||tokens[point].type==TK_jia||tokens[point].type==TK_Jian||tokens[point].type==TK_MU||tokens[point].type==TK_EQ
+            ||tokens[point].type==TK_NQ||tokens[point].type==TK_YU||tokens[point].type==TK_zuo)
+              {
+                tokens[i].type=TK_FU;
+                continue;
+              }
+          
+        else  
+          {
+            continue;
+          }
+          }
         if(tokens[i].type==TK_MU)
           {
             if(i==0)
