@@ -315,6 +315,13 @@ paddr_t f(int p,int q)
         }
       else if(tokens[p].type==TK_FU && NBL_ZYSF(p,q)==0)
         {
+          paddr_t val4;
+          val4=f(p+1,q);
+          if(p+1==q&&val4>10)
+            {
+              val4=val4%10;
+            }
+
           return -f(p+1,q);
         }
       else {
