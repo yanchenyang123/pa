@@ -396,13 +396,13 @@ paddr_t expr(char *e, bool *success)
   }
  for(int i=0;i<nr_token;i++)
       {
-         int point =0;
+        int point =0;
         if(tokens[i].type==TK_MU)
           {
             if(i==0)
               {
                 tokens[i].type=TK_DEREF;
-                break; 
+                continue;
               }
             else  
             {
@@ -415,14 +415,14 @@ paddr_t expr(char *e, bool *success)
             if(point==-1)
               {
                 tokens[i].type=TK_DEREF;
-                break;
+                continue;
 
               }
             else if(tokens[point].type==TK_Chu||tokens[point].type==TK_jia||tokens[point].type==TK_Jian||tokens[point].type==TK_MU||tokens[point].type==TK_EQ
             ||tokens[point].type==TK_NQ||tokens[point].type==TK_YU||tokens[point].type==TK_zuo)
               {
                 tokens[i].type=TK_DEREF;
-                break;
+                continue;
               }
           }
         else  
