@@ -279,7 +279,6 @@ paddr_t f(int p,int q)
       else if (p == q) 
       {
         unsigned int index;
-        unsigned int num=4294967295;
         switch (tokens[p].type)
           {
             case TK_DZ: 
@@ -291,7 +290,7 @@ paddr_t f(int p,int q)
             {
               _Bool *succese1;
               succese1=(_Bool *)true;
-              return num+isa_reg_str2val(tokens[p].str,succese1)+1;
+              return -isa_reg_str2val(tokens[p].str,succese1);
             };
             case TK_num:
             {
