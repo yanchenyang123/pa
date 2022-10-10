@@ -279,12 +279,13 @@ paddr_t f(int p,int q)
       else if (p == q) 
       {
         int index=0;
+        int index1=0;
         switch (tokens[p].type)
           {
             case TK_DZ: 
             {
-              index=strtoul(tokens[p].str,NULL,0);
-              return index;             
+              index1=strtoul(tokens[p].str,NULL,0);
+              return index1;             
             };
             case TK_Reg:
             {
