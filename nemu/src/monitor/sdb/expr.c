@@ -514,6 +514,11 @@ paddr_t expr(char *e, bool *success)
   /* TODO: Insert codes to evaluate the expression. */
   paddr_t a=f(p,q);
   printf("%u\n",a);
+  for(int i=0;i<nr_token;i++)
+    {
+      printf("%d",tokens[i].type);
+      printf("\n");
+    }
   return a;
 }
 
