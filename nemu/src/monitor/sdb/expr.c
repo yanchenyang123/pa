@@ -294,7 +294,7 @@ paddr_t f(int p,int q)
             };
             case TK_num:
             {
-              index=strtoul(tokens[p].str,NULL,10);
+              sscanf(tokens[p].str,"%d",&index);
               return index;
             };
           }
