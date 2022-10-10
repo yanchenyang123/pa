@@ -284,8 +284,8 @@ paddr_t f(int p,int q)
           {
             case TK_DZ: 
             {
-              index1=strtoul(tokens[p].str,NULL,0);
-              return index1;             
+              index=strtoul(tokens[p].str,NULL,0);
+              return index;             
             };
             case TK_Reg:
             {
@@ -295,8 +295,8 @@ paddr_t f(int p,int q)
             };
             case TK_num:
             {
-              sscanf(tokens[p].str,"%d",&index);
-              return index;
+              sscanf(tokens[p].str,"%d",&index1);
+              return index1;
             };
           }
         }
@@ -380,7 +380,7 @@ paddr_t expr(char *e, bool *success)
               }
             if(tokens[i-1].type==TK_NOTYPE)
               {
-                point1-=1;
+                point1=i-2;
               }
             if(point1==-1)
               {
