@@ -318,9 +318,9 @@ paddr_t f(int p,int q)
           paddr_t val4;
           val4=f(p+1,q);
           printf("%d\n",val4);
-          if(p+1==q&&val4>10)
+          if(p+1==q&&val4>=10)
             {
-              val4=val4-10;
+              val4=val4/10;
             }
           printf("%d\n",val4);
           return -f(p+1,q);
