@@ -305,7 +305,7 @@ paddr_t f(int p,int q)
         */
         return f(p + 1, q - 1);
         }
-      else if(tokens[p].type==TK_DEREF)
+      else if(tokens[p].type==TK_DEREF&&NBL_ZYSF(p,q)==0)
         {
           int next_op=p+1;
           paddr_t val3;
