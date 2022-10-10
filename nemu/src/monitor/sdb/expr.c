@@ -337,23 +337,27 @@ paddr_t f(int p,int q)
                       break;
                     }
                   }
-                val3=f(p+1,next_op);
+
               }
               else
               {
-              
-                val3=f(p+1,next_op);
                 jieshu=1;
               }           
             }
+          if(tokens[next_op].type==TK_NOTYPE)
+            {
+              next_op+=1;
+            }
           if(next_op==q)
             {
+              val3=f(p+1,next_op);
               return paddr_read(val3,4);
             }
           else
             {
             paddr_t val4;
             val4=f(next_op+2,q);
+            val3=f(p+1,next_op);
             switch(tokens[next_op+1].type)
             {
             case TK_Chu:return paddr_read(val3,4)/val4;
