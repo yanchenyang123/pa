@@ -352,7 +352,7 @@ paddr_t f(int p,int q)
               val3=f(p+1,next_op);
               return paddr_read(val3,4);
             }
-          else
+          else if(next_op!=q)
             {
             paddr_t val4;
             val4=f(next_op+2,q);
