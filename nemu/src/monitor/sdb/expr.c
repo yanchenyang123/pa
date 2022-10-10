@@ -407,9 +407,7 @@ paddr_t f(int p,int q)
             case TK_EQ: return val1==val2;
             case TK_NQ: return val1 != val2;
             }
-        
-  
-}
+      }
       if(tokens[p].type==TK_DEREF)
         {
           int next_op=p+1;
