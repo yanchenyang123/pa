@@ -295,6 +295,7 @@ paddr_t f(int p,int q)
             };
             case TK_num:
             {
+              printf("%s",tokens[p].str);
               sscanf(tokens[p].str,"%d",&index1);
               return index1;
             };
