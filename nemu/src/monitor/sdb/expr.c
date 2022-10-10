@@ -341,7 +341,7 @@ paddr_t f(int p,int q)
               }
               else
               {
-                next_op=p+1;
+              
                 val3=f(p+1,next_op);
                 jieshu=1;
               }           
