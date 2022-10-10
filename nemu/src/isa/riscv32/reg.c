@@ -36,8 +36,8 @@ word_t isa_reg_str2val(const char *s, bool *success) {
       if(strncmp(s,regs[i],3)==0)
         {
           success=(_Bool *)true;
-          unsigned int j=gpr(i);
-          return j;
+          return gpr(i);
+
         }
     }
     success=(_Bool *)false;
