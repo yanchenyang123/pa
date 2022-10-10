@@ -497,7 +497,7 @@ paddr_t expr(char *e, bool *success)
 
               }
             else if(tokens[point].type==TK_Chu||tokens[point].type==TK_jia||tokens[point].type==TK_Jian||tokens[point].type==TK_MU||tokens[point].type==TK_EQ
-            ||tokens[point].type==TK_NQ||tokens[point].type==TK_YU||tokens[point].type==TK_zuo)
+            ||tokens[point].type==TK_NQ||tokens[point].type==TK_YU||tokens[point].type==TK_zuo||tokens[point].type==TK_FU)
               {
                 tokens[i].type=TK_DEREF;
                 continue;
