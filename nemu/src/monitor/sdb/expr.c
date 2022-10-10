@@ -306,18 +306,16 @@ paddr_t f(int p,int q)
         */
         return f(p + 1, q - 1);
         }
-      else if(tokens[p].type==TK_DEREF&&NBL_ZYSF(p,q)==0)
+      else if(tokens[p].type==TK_DEREF && NBL_ZYSF(p,q)==0)
         {
           paddr_t val3;
           val3=f(p+1,q);
           return paddr_read(val3,4);
           
         }
-      else if(tokens[p].type==TK_FU&&NBL_ZYSF(p,q)==0)
+      else if(tokens[p].type==TK_FU && NBL_ZYSF(p,q)==0)
         {
-          paddr_t val4;
-          val4=f(p+1,q);
-          return -val4;
+          return -f(p+1,q);
         }
       else {
         if(tokens[p].type==TK_NOTYPE)
