@@ -291,7 +291,7 @@ paddr_t f(int p,int q)
             {
               _Bool *succese1;
               succese1=(_Bool *)true;
-              return num+isa_reg_str2val(tokens[p].str,succese1);
+              return num+isa_reg_str2val(tokens[p].str,succese1)+1;
             };
             case TK_num:
             {
