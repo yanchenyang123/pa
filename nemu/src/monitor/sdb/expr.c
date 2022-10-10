@@ -278,7 +278,7 @@ paddr_t f(int p,int q)
         }
       else if (p == q) 
       {
-        unsigned int index;
+        unsigned int index=0;
         switch (tokens[p].type)
           {
             case TK_DZ: 
@@ -294,7 +294,7 @@ paddr_t f(int p,int q)
             };
             case TK_num:
             {
-              sscanf(tokens[p].str,"%d",&index);
+              index=strtoul(tokens[p].str,NULL,10);
               return index;
             };
           }
@@ -316,7 +316,7 @@ paddr_t f(int p,int q)
         {
           paddr_t val4;
           val4=f(p+1,q);
-          return val4;
+          return -val4;
         }
       else {
         if(tokens[p].type==TK_NOTYPE)
