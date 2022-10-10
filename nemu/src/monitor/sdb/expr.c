@@ -351,6 +351,10 @@ paddr_t f(int p,int q)
             {
               return paddr_read(val3,4);
             }
+          else if(tokens[next_op+1].type==TK_NOTYPE)
+            {
+              next_op+=1;
+            }
           else
             {
             paddr_t val4;
