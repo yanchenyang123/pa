@@ -367,7 +367,7 @@ paddr_t expr(char *e, bool *success)
     *success = false;
     return 0;
   }
- /*for(int i=0;i<nr_token;i++)
+ for(int i=0;i<nr_token;i++)
       {
         int point =0;
         int point1=0;
@@ -435,7 +435,7 @@ paddr_t expr(char *e, bool *success)
           {
             continue;
           }
-      }*/
+      }
   int p=0;
   int q=nr_token-1;
   /* TODO: Insert codes to evaluate the expression. */
