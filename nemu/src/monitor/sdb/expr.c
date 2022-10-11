@@ -94,7 +94,7 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char str[100];
+  char str[32];
 } Token;
 
 static Token tokens[1000] __attribute__((used)) = {};
@@ -295,7 +295,6 @@ paddr_t f(int p,int q)
             };
             case TK_num:
             {
-              printf("%s\n",tokens[p].str);
               sscanf(tokens[p].str,"%d",&index1);
               return index1;
             };
@@ -318,12 +317,10 @@ paddr_t f(int p,int q)
         {
           paddr_t val4;
           val4=f(p+1,q);
-          printf("%d\n",val4);
           if(p+1==q&&val4>=10)
             {
               val4=val4/10;
             }
-          printf("%d\n",val4);
           return -val4;
         }
       else {
