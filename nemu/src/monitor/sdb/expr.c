@@ -153,7 +153,6 @@ static bool make_token(char *e) {
           tokens[nr_token].type=rules[i].token_type;
           substr(substr_start,substr_len);
           nr_token+=1;
-          printf("%s\n",tokens[nr_token].str);
       break;
       }
 
@@ -369,7 +368,7 @@ paddr_t expr(char *e, bool *success)
     *success = false;
     return 0;
   }
- for(int i=0;i<nr_token;i++)
+ /*for(int i=0;i<nr_token;i++)
       {
         int point =0;
         int point1=0;
@@ -437,7 +436,7 @@ paddr_t expr(char *e, bool *success)
           {
             continue;
           }
-      }
+      }*/
   int p=0;
   int q=nr_token-1;
   /* TODO: Insert codes to evaluate the expression. */
