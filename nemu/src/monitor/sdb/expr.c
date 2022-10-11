@@ -117,6 +117,7 @@ static void substr_(char *str_start,int length)
   }
 
 static bool make_token(char *e) {
+  printf("%s\n",e);
   int position = 0;
   int i;
   regmatch_t pmatch;
