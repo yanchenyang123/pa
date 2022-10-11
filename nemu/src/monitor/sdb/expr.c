@@ -300,13 +300,9 @@ paddr_t f(int p,int q)
             };
             case TK_num:
             {
-              printf("%s\n",tokens[q].str);
-              printf("%d\n",tokens[q].len);
+
               sscanf(tokens[p].str,"%d",&index1);
-              if(tokens[p].len==1&&index1>=10)
-                {
-                  index1=index1/10;
-                }
+
               return index1;
             };
           }
