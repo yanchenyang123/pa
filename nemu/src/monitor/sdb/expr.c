@@ -145,7 +145,6 @@ static bool make_token(char *e) {
           tokens[nr_token].type=rules[i].token_type;
           substr_(substr_start,substr_len);
           nr_token+=1;
-          printf("%s\n",tokens[nr_token].str);
           break;
         }
       else
@@ -153,7 +152,6 @@ static bool make_token(char *e) {
           tokens[nr_token].type=rules[i].token_type;
           substr(substr_start,substr_len);
           nr_token+=1;
-          printf("%s\n",tokens[nr_token].str);
       break;
       }
 
