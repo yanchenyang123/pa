@@ -155,7 +155,6 @@ static bool make_token(char *e) {
           substr(substr_start,substr_len);
           nr_token+=1;
           tokens[nr_token].len=substr_len;
-          printf("%d",tokens[nr_token].len);
       break;
       }
 
@@ -301,8 +300,8 @@ paddr_t f(int p,int q)
             };
             case TK_num:
             {
-              printf("%s\n",tokens[p].str);
-              printf("%d\n",tokens[p].len);
+              printf("%s\n",tokens[q].str);
+              printf("%d\n",tokens[q].len);
               sscanf(tokens[p].str,"%d",&index1);
               if(tokens[p].len==1&&index1>=10)
                 {
