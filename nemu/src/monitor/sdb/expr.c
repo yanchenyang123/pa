@@ -95,6 +95,7 @@ void init_regex() {
 typedef struct token {
   int type;
   char str[32];
+  int len;
 } Token;
 
 static Token tokens[1000] __attribute__((used)) = {};
@@ -145,7 +146,7 @@ static bool make_token(char *e) {
           tokens[nr_token].type=rules[i].token_type;
           substr_(substr_start,substr_len);
           nr_token+=1;
-
+          tokens[nr_token].len=substr_len-1;
           break;
         }
       else
@@ -153,6 +154,7 @@ static bool make_token(char *e) {
           tokens[nr_token].type=rules[i].token_type;
           substr(substr_start,substr_len);
           nr_token+=1;
+          tokens[nr_token].len=substr_len;
       break;
       }
 
@@ -291,12 +293,20 @@ paddr_t f(int p,int q)
             {
               _Bool *succese1;
               succese1=(_Bool *)true;
-              return -isa_reg_str2val(tokens[p].str,succese1);
+              index=-isa_reg_str2val(tokens[p].str,succese1);
+              return index;
+
+
             };
             case TK_num:
             {
               printf("%s\n",tokens[p].str);
+              
               sscanf(tokens[p].str,"%d",&index1);
+              if(tokens[p].len==1&&index1>=10)
+                {
+                  index1=index1/10;
+                }
               return index1;
             };
           }
@@ -318,10 +328,6 @@ paddr_t f(int p,int q)
         {
           paddr_t val4;
           val4=f(p+1,q);
-          if(p+1==q&&val4>=10)
-            {
-              val4=val4/10;
-            }
           return -val4;
         }
       else {
