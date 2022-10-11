@@ -155,6 +155,7 @@ static bool make_token(char *e) {
           substr(substr_start,substr_len);
           nr_token+=1;
           tokens[nr_token].len=substr_len;
+          printf("%d",tokens[nr_token].len);
       break;
       }
 
