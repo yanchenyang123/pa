@@ -117,7 +117,6 @@ static void substr_(char *str_start,int length)
   }
 
 static bool make_token(char *e) {
-  printf("%s\n",e);
   int position = 0;
   int i;
   regmatch_t pmatch;
@@ -135,7 +134,7 @@ static bool make_token(char *e) {
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
-
+        printf("%d\n",substr_len);
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
