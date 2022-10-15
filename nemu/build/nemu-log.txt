@@ -3,27 +3,5 @@
 [1;34m[src/monitor/monitor.c:51 load_img] No image is given. Use the default build-in image.[0m
 [1;34m[src/monitor/monitor.c:28 welcome] Trace: [1;32mON[0m[0m
 [1;34m[src/monitor/monitor.c:29 welcome] If trace is enabled, a log file will be generated to record the trace. This may lead to a large log file. If it is not necessary, you can disable it in menuconfig[0m
-[1;34m[src/monitor/monitor.c:32 welcome] Build time: 08:55:56, Oct  9 2022[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[10] = "[1-9][0-9]*" at position 0 with len 1: 1[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[1] = "\+" at position 1 with len 1: +[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[5] = "\-" at position 2 with len 1: -[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[10] = "[1-9][0-9]*" at position 3 with len 1: 1[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[4] = "\*" at position 0 with len 1: *[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[3] = "(0x).{1,8}" at position 1 with len 10: 0x80000000[0m
+[1;34m[src/monitor/monitor.c:32 welcome] Build time: 20:34:32, Oct 14 2022[0m
 0x80000000: 80 00 02 b7 lui	t0, 524288
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[4] = "\*" at position 0 with len 1: *[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[7] = "\$[^0-9][a-z0-9]+" at position 1 with len 3: $t0[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[10] = "[1-9][0-9]*" at position 0 with len 1: 1[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[10] = "[1-9][0-9]*" at position 0 with len 2: 10[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[10] = "[1-9][0-9]*" at position 0 with len 1: 1[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[5] = "\-" at position 0 with len 1: -[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[10] = "[1-9][0-9]*" at position 1 with len 1: 1[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[5] = "\-" at position 0 with len 1: -[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[10] = "[1-9][0-9]*" at position 1 with len 1: 1[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[1] = "\+" at position 2 with len 1: +[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[10] = "[1-9][0-9]*" at position 3 with len 1: 2[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[4] = "\*" at position 0 with len 1: *[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[7] = "\$[^0-9][a-z0-9]+" at position 1 with len 3: $t0[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[1] = "\+" at position 4 with len 1: +[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[5] = "\-" at position 5 with len 1: -[0m
-[1;34m[src/monitor/sdb/expr.c:135 make_token] match rules[10] = "[1-9][0-9]*" at position 6 with len 1: 1[0m
